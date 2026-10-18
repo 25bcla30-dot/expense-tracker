@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Expense Tracker</title>
+</head>
+<body>
+    <h1>Expense Tracker</h1>
+
+    <form method="POST" action="/">
+        <input type="text" name="title" placeholder="Expense name" required>
+        <input type="number" name="amount" placeholder="Amount" required>
+        <select name="category">
+            <option>Food</option>
+            <option>Travel</option>
+            <option>Shopping</option>
+            <option>Other</option>
+        </select>
+        <button type="submit">Add Expense</button>
+    </form>
+
+    <h2>Total: ₹{{ total }}</h2>
+
+        <table border="1" cellpadding="8">
+        <tr>
+            <th>Name</th>
+            <th>Amount</th>
+            <th>Category</th>
+            <th>Action</th>
+        </tr>
+        {% for e in expenses %}
+        <tr>
+            <td>{{ e["title"] }}</td>
+            <td>₹{{ e["amount"] }}</td>
+            <td>{{ e["category"] }}</td>
+            <td>
+                <form method="POST" action="/delete/{{ e['id'] }}">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
